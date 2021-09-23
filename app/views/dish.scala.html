@@ -1,0 +1,19 @@
+@(dish: Form[CreateDishForm])(implicit request: MessagesRequestHeader)
+
+@import helper._
+
+@request.flash.get("success").map { key =>
+    @request.messages(key)
+}
+
+@main("Add a dish") {
+    @form(routes.DishController.addDish) {
+        @inputText(dish("name"))
+        @inputText(dish("price"))
+        @CSRF.formField
+
+        <div class="buttons">
+            <input type="submit" value="Add Dish"/>
+        </div>
+    }
+}
